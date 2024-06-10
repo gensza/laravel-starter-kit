@@ -6,16 +6,17 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="container">
-                    <table id="myTable" class="table table-hover">
+                <div class="container p-5">
+                    <table class="table table-hover table-bordered data-table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">No</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Role</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -27,11 +28,11 @@
 </x-app-layout>
 
 <script>
-    $(document).ready(function() {
-        $('#myTable').DataTable({
+    $(function() {
+        var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('users.list') }}",
+            ajax: "{{ route('users.index') }}",
             columns: [{
                     data: 'id',
                     name: 'id'
@@ -45,10 +46,16 @@
                     name: 'email'
                 },
                 {
-                    data: 'role_id',
+                    data: 'role',
                     name: 'role_id'
                 },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
             ]
-        })
-    })
+        });
+    });
 </script>
